@@ -29,9 +29,7 @@ print(score)
 
 # part 2
 
-# CYCLES STARTING AT -1 MAKES IT WORK AND I CANT BE BOTHERED TO FIGURE OUT WHY
-# AND FIX THIS PROPERLY, OFF BY ONE ERROR SOMEWHERE
-cycles = -1
+cycles = 0
 position = 0
 register = 1
 
@@ -39,19 +37,19 @@ toprint = [[] for n in range(6)]
 
 while True:
     cycles = cycles + 1
-    if abs((cycles % 40) - register) <= 1 :
-        toprint[cycles//40].append('#')
+    if abs(((cycles-1) % 40) - register) <= 1 :
+        toprint[(cycles-1)//40].append('#')
     else:
-        toprint[cycles//40].append('.')
+        toprint[(cycles-1)//40].append('.')
     if lines[position % len(lines)][0] == "a":
         cycles = cycles + 1
-        if abs((cycles % 40) - register) <= 1 :
-            toprint[cycles//40].append('#')
+        if abs(((cycles-1) % 40) - register) <= 1 :
+            toprint[(cycles-1)//40].append('#')
         else:
-            toprint[cycles//40].append('.')
+            toprint[(cycles-1)//40].append('.')
         register = register + int(lines[position % len(lines)].split(" ")[1])
     position = position + 1
-    if cycles >= 239:
+    if cycles >= 240:
         break
     print(cycles,register)
     print("\n".join(["".join(printline) for printline in toprint]))
